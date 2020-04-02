@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reagent index{% endblock %}
+
+{% block body %}
+    <h1>Reagent index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Formula</th>
+                <th>Cas</th>
+                <th>Private</th>
+                <th>Secure</th>
+                <th>Notes</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reagent in reagents %}
+            <tr>
+                <td>{{ reagent.id }}</td>
+                <td>{{ reagent.name }}</td>
+                <td>{{ reagent.formula }}</td>
+                <td>{{ reagent.cas }}</td>
+                <td>{{ reagent.private ? 'Yes' : 'No' }}</td>
+                <td>{{ reagent.secure ? 'Yes' : 'No' }}</td>
+                <td>{{ reagent.notes }}</td>
+                <td>
+                    <a href="{{ path('reagent_show', {'id': reagent.id}) }}">show</a>
+                    <a href="{{ path('reagent_edit', {'id': reagent.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('reagent_new') }}">Create new</a>
+{% endblock %}

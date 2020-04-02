@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Reagent{% endblock %}
+
+{% block body %}
+    <h1>Edit Reagent</h1>
+
+    {{ include('reagent/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('reagent_index') }}">back to list</a>
+
+    {{ include('reagent/_delete_form.html.twig') }}
+{% endblock %}
