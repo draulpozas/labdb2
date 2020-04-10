@@ -12,7 +12,7 @@ function ifenter(ev) {
 
 function find() {
     let loading = document.getElementById('loading');
-    loading.style.opacity = '1';
+    loading.style.display = 'inline-block';
     getRgts();
     let table = document.getElementById('resultsTable');
     // if (rgts.length == 0) {
@@ -23,15 +23,15 @@ function find() {
         rgts.forEach(rgt => {
             let tr = document.createElement('tr');
 
-            appendTd(rgt.name, tr);
+            appendTd(rgt.name, tr, 'reagentname');
             appendTd(rgt.formula, tr);
             appendTd(rgt.cas, tr);
             appendTd(rgt.notes, tr);
-            appendTd(`<a href="${rgt.id}">show</a> | <a href="${rgt.id}/edit">edit</a>`, tr);
+            appendTd(`<a href="${rgt.id}">🗎</a> | <a href="${rgt.id}/edit">🖉</a>`, tr);
             table.appendChild(tr);
         });
     }
-    loading.style.opacity = '0';
+    loading.style.display = 'none';
 }
 
 function getRgts() {
@@ -49,8 +49,11 @@ function getRgts() {
     xhttp.send();
 }
 
-function appendTd(inner, parentTr) {
+function appendTd(inner, parentTr, addClass = null) {
     let td = document.createElement('td');
     td.innerHTML = inner;
+    if (addClass != null) {
+        td.classList.add(addClass);
+    }
     parentTr.appendChild(td);
 }

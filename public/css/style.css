@@ -1,0 +1,40 @@
+#loading {
+    display: none;
+    /* font-size: large; */
+    /* font-weight: bolder; */
+    transition: opacity .2s;
+    animation-name: loading-anim;
+    animation-duration: .5s;
+    animation-direction: initial;
+    animation-timing-function: linear;
+    animation-delay: 0;
+    animation-iteration-count: infinite;
+}
+
+@keyframes loading-anim {
+    0% {transform: rotate(0deg);}
+    50% {transform: rotate(180deg);}
+    100% {transform: rotate(360deg);}
+}
+
+#resultsTable tr:nth-of-type(even) {
+    background-color: #EEE;
+}
+
+#resultsTable a {
+    display: inline-block;
+    padding: .5em;
+    text-decoration: none;
+    font-weight: bolder;
+    color: blue;
+}
+#resultsTable a:visited {
+    color: blue;
+}
+#resultsTable a:hover {
+    background-color: lightgray;
+}
+
+.reagentname {
+    text-transform: capitalize;
+}
