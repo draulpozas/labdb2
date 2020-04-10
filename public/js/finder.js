@@ -37,7 +37,7 @@ function find() {
 function getRgts() {
     let inputField = document.getElementById('query');
     let query = inputField.value;
-    // inputField.value = '';
+    inputField.value = '';
 
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
