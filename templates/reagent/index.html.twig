@@ -1,15 +1,16 @@
 {% extends 'app.html.twig' %}
 
-{% block title %}Reagent index{% endblock %}
+{% block title %}Reagent finder{% endblock %}
 {% block scripts %}
     <script src="{{ asset('js/finder.js') }}"></script>
 {% endblock %}
 
 {% block body %}
-    <h1>Reagent index</h1>
+    <h1>Reagent finder</h1>
 
-    <input type="text" id="query">
+    <input type="text" id="query" onkeyup="ifenter(event)">
     <button onclick="find()">🔎</button>
+    <span id="loading" style="opacity: 0;">↻</span>
 
     <table class="table">
         <thead>
@@ -35,8 +36,7 @@
                 <td>{{ reagent.secure ? 'Yes' : 'No' }}</td> #}
                 <td>{{ reagent.notes }}</td>
                 <td>
-                    <a href="{{ path('reagent_show', {'id': reagent.id}) }}">show</a>
-                    <a href="{{ path('reagent_edit', {'id': reagent.id}) }}">edit</a>
+                    <a href="{{ path('reagent_show', {'id': reagent.id}) }}">show</a> | <a href="{{ path('reagent_edit', {'id': reagent.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
