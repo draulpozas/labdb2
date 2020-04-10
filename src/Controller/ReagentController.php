@@ -8,6 +8,7 @@ use App\Repository\ReagentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -28,10 +29,10 @@ class ReagentController extends AbstractController
     /**
      * @Route("/finder", name="reagent_finder")
      */
-    public function ajaxAction(Request $request, ReagentRepository $reagentRepository) {
+    public function ajaxAction(Request $request, ReagentRepository $reagentRepository, Security $security) {
         if ($request->getMethod() == 'GET') {
-            $name = $request->query->get('name');;
-            // var_dump($name);
+            $name = $request->query->get('name');
+            self::logSearch($name, $security->getUser());
             $rgts = $reagentRepository->findByName($name);
             $jsonstring = '[';
             foreach ($rgts as $rgt) {
@@ -49,6 +50,12 @@ class ReagentController extends AbstractController
         } else {
             return new Response('no hay na');
         }
+    }
+
+    private static function logSearch($query, $user) {
+        $log = file_get_contents(__DIR__.'/logs/'. $user->getId() .'.txt');
+        $log .= $query .'@'. time() .';';
+        file_put_contents(__DIR__.'/logs/'. $user->getId() .'.txt', $log);
     }
 
     /**

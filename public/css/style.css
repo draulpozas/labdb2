@@ -1,3 +1,8 @@
+#finder * {
+    font-size: 2rem;
+    margin: 0 .2em;
+}
+
 #loading {
     display: none;
     /* font-size: large; */
@@ -17,8 +22,13 @@
     100% {transform: rotate(360deg);}
 }
 
-#resultsTable tr:nth-of-type(even) {
+.table tr:nth-of-type(even) {
     background-color: #EEE;
+}
+
+.table td {
+    font-size: 2rem;
+    padding: 0 .5em;
 }
 
 #resultsTable a {
@@ -37,4 +47,21 @@
 
 .reagentname {
     text-transform: capitalize;
+}
+
+#newReagentLink {
+    display: inline-block;
+    /* position: absolute; */
+    float: left;
+    bottom: 0;
+    left: 0;
+    font-size: 55px;
+    font-weight: bolder;
+    padding: 5px;
+    text-decoration: none;
+    color: black;
+    border-radius: .1em;
+}
+#newReagentLink:hover {
+    background-color: lightgray;
 }

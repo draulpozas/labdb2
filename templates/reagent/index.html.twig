@@ -11,9 +11,12 @@
 {% block body %}
     <h1>Reagent finder</h1>
 
-    <input type="text" id="query" onkeyup="ifenter(event)">
-    <button onclick="find()">🔎</button>&nbsp;
-    <span id="loading">_</span>
+    <div id="finder">
+        <input type="text" id="query" onkeyup="ifenter(event)">
+        <button onclick="find()">🔎</button>&nbsp;
+        <span id="loading">_</span>
+    </div>
+    
 
     <table class="table">
         <thead>
@@ -39,7 +42,7 @@
                 <td>{{ reagent.secure ? 'Yes' : 'No' }}</td> #}
                 <td>{{ reagent.notes }}</td>
                 <td>
-                    <a href="{{ path('reagent_show', {'id': reagent.id}) }}">🗎</a> | <a href="{{ path('reagent_edit', {'id': reagent.id}) }}">🖉</a>
+                    <a href="{{ path('reagent_show', {'id': reagent.id}) }}">🗎</a> | <a href="{{ path('reagent_edit', {'id': reagent.id}) }}">🖉</a> | <a href="https://www.commonchemistry.org/ChemicalDetail.aspx?ref={{ reagent.cas }}" target="_blank">🌐</a>
                 </td>
             </tr>
         {% else %}
@@ -50,5 +53,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('reagent_new') }}">Create new</a>
+    <a href="{{ path('reagent_new') }}" id="newReagentLink">+</a>
 {% endblock %}
