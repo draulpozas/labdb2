@@ -1,32 +1,38 @@
 {% extends 'app.html.twig' %}
 
 {% block title %}Reagent index{% endblock %}
+{% block scripts %}
+    <script src="{{ asset('js/finder.js') }}"></script>
+{% endblock %}
 
 {% block body %}
     <h1>Reagent index</h1>
 
+    <input type="text" id="query">
+    <button onclick="find()">🔎</button>
+
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                {# <th>Id</th> #}
                 <th>Name</th>
                 <th>Formula</th>
                 <th>Cas</th>
-                <th>Private</th>
-                <th>Secure</th>
+                {# <th>Private</th>
+                <th>Secure</th> #}
                 <th>Notes</th>
-                <th>actions</th>
+                <th></th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="resultsTable">
         {% for reagent in reagents %}
             <tr>
-                <td>{{ reagent.id }}</td>
+                {# <td>{{ reagent.id }}</td> #}
                 <td>{{ reagent.name }}</td>
                 <td>{{ reagent.formula }}</td>
                 <td>{{ reagent.cas }}</td>
-                <td>{{ reagent.private ? 'Yes' : 'No' }}</td>
-                <td>{{ reagent.secure ? 'Yes' : 'No' }}</td>
+                {# <td>{{ reagent.private ? 'Yes' : 'No' }}</td>
+                <td>{{ reagent.secure ? 'Yes' : 'No' }}</td> #}
                 <td>{{ reagent.notes }}</td>
                 <td>
                     <a href="{{ path('reagent_show', {'id': reagent.id}) }}">show</a>
@@ -35,7 +41,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="8">no records found</td>
+                <td colspan="5">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

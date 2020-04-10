@@ -19,22 +19,20 @@ class ReagentRepository extends ServiceEntityRepository
         parent::__construct($registry, Reagent::class);
     }
 
-    // /**
-    //  * @return Reagent[] Returns an array of Reagent objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return Reagent[] Returns an array of Reagent objects
+     */
+    public function findByName($name)
     {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('r.id', 'ASC')
-            ->setMaxResults(10)
+        // var_dump($name);
+        return $this->createQueryBuilder('rgt')
+            ->andWhere('rgt.name LIKE :name')
+            ->setParameter('name', '%'. $name .'%')
+            ->orderBy('rgt.name', 'ASC')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?Reagent

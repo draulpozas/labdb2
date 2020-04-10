@@ -26,6 +26,32 @@ class ReagentController extends AbstractController
     }
 
     /**
+     * @Route("/finder", name="reagent_finder")
+     */
+    public function ajaxAction(Request $request, ReagentRepository $reagentRepository) {
+        if ($request->getMethod() == 'GET') {
+            $name = $request->query->get('name');;
+            // var_dump($name);
+            $rgts = $reagentRepository->findByName($name);
+            $jsonstring = '[';
+            foreach ($rgts as $rgt) {
+                $jsonstring .= '{"id":"'. $rgt->getId() 
+                    .'","name":"'. $rgt->getName() 
+                    .'","formula":"'. $rgt->getFormula() 
+                    .'","cas":"'. $rgt->getCas() 
+                    .'","private":"'. $rgt->getPrivate() 
+                    .'","secure":"'. $rgt->getSecure() 
+                    .'","notes":"'. $rgt->getNotes() .'"},';
+            }
+            $jsonstring .= ']';
+            $jsonstring = str_replace('},]', '}]', $jsonstring);
+            return new Response($jsonstring);
+        } else {
+            return new Response('no hay na');
+        }
+    }
+
+    /**
      * @Route("/new", name="reagent_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
