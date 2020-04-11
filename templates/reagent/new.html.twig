@@ -2,10 +2,11 @@
 
 {% block title %}New Reagent{% endblock %}
 
+{% block headerlinks %}<a href="{{ path('reagent_index') }}">🡠</a>{% endblock %}
 {% block body %}
+    
     <h1>Create new Reagent</h1>
 
     {{ include('reagent/_form.html.twig') }}
 
-    <a href="{{ path('reagent_index') }}">back to list</a>
 {% endblock %}

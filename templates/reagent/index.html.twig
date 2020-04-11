@@ -1,9 +1,6 @@
 {% extends 'app.html.twig' %}
 
 {% block title %}Reagent finder{% endblock %}
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-{% endblock %}
 {% block scripts %}
     <script src="{{ asset('js/finder.js') }}"></script>
 {% endblock %}
@@ -42,7 +39,7 @@
                 <td>{{ reagent.secure ? 'Yes' : 'No' }}</td> #}
                 <td>{{ reagent.notes }}</td>
                 <td>
-                    <a href="{{ path('reagent_show', {'id': reagent.id}) }}">🗎</a> | <a href="{{ path('reagent_edit', {'id': reagent.id}) }}">🖉</a> | <a href="https://www.commonchemistry.org/ChemicalDetail.aspx?ref={{ reagent.cas }}" target="_blank">🌐</a>
+                    <a class="action" href="{{ path('reagent_show', {'id': reagent.id}) }}">🗎</a> | <a class="action" href="{{ path('reagent_edit', {'id': reagent.id}) }}">🖉</a> | <a class="action" href="https://www.commonchemistry.org/ChemicalDetail.aspx?ref={{ reagent.cas }}" target="_blank">🌐</a>
                 </td>
             </tr>
         {% else %}

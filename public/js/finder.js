@@ -27,7 +27,7 @@ function find() {
             appendTd(rgt.formula, tr);
             appendTd(rgt.cas, tr);
             appendTd(rgt.notes, tr);
-            appendTd(`<a href="${rgt.id}">🗎</a> | <a href="${rgt.id}/edit">🖉</a> | <a href="https://www.commonchemistry.org/ChemicalDetail.aspx?ref=${rgt.cas}" target="_blank">🌐</a>`, tr);
+            appendTd(`<a class="action" href="${rgt.id}">🗎</a> | <a class="action" href="${rgt.id}/edit">🖉</a> | <a class="action" href="https://www.commonchemistry.org/ChemicalDetail.aspx?ref=${rgt.cas}" target="_blank">🌐</a>`, tr);
             table.appendChild(tr);
         });
     }

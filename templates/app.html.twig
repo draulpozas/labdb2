@@ -1,4 +1,4 @@
 {% extends "base.html.twig" %}
 {% block header %}
-    <header><a href="/logout">Log out</a></header>
+    <header>{% block headerlinks %}{% endblock %}<a id="logout" href="/logout">Log out</a></header>
 {% endblock %}

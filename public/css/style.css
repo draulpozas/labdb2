@@ -1,3 +1,35 @@
+* {
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: lighter;
+}
+body {
+    margin-top: 4em;
+}
+
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: cornflowerblue;
+    color: white;
+    margin: 0;
+    /* padding: 1em; */
+    width: 100%;
+    text-transform: uppercase;
+}
+header a {
+    display: inline-block;
+    color: inherit;
+    text-decoration: none;
+    padding: 1em;
+}
+header a:hover {
+    background-color: #ffffff22;
+}
+#logout {
+    float: right;
+}
+
 #finder * {
     font-size: 2rem;
     margin: 0 .2em;
@@ -31,18 +63,26 @@
     padding: 0 .5em;
 }
 
-#resultsTable a {
+.action {
+    font-size: 2rem;
+    padding: 0 .5em;
     display: inline-block;
     padding: .5em;
     text-decoration: none;
     font-weight: bolder;
     color: blue;
 }
-#resultsTable a:visited {
+.action:visited {
     color: blue;
 }
-#resultsTable a:hover {
+.action:hover {
     background-color: lightgray;
+}
+
+button.delete, button.save {
+    min-width: 3rem;
+    float: left;
+    font-size: 2rem;
 }
 
 .reagentname {
@@ -64,4 +104,8 @@
 }
 #newReagentLink:hover {
     background-color: lightgray;
+}
+
+form[name="reagent"] input, select {
+    margin: .3em .2em;
 }
