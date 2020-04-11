@@ -72,9 +72,17 @@ class ReagentController extends AbstractController
     }
 
     private static function logSearch($query, $user) {
-        $log = file_get_contents(__DIR__.'/logs/'. $user->getId() .'.txt');
-        $log .= $query .'@'. time() .';';
-        file_put_contents(__DIR__.'/logs/'. $user->getId() .'.txt', $log);
+        $file = __DIR__.'/logs/'. $user->getId() .'.txt';
+        if (file_exists($file)) {
+            $log = file_get_contents($file);
+            $log .= $query .'@'. time() .';';
+            file_put_contents($file, $log);
+        } else {
+            $filepointer = fopen($file, 'w');
+            fwrite($filepointer, $query .'@'. time() .';');
+            fclose($filepointer);
+        }
+        
     }
 
     /**
