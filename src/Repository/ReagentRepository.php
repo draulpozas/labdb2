@@ -22,6 +22,19 @@ class ReagentRepository extends ServiceEntityRepository
     /**
      * @return Reagent[] Returns an array of Reagent objects
      */
+    public function findAll()
+    {
+        // var_dump($name);
+        return $this->createQueryBuilder('rgt')
+        ->orderBy('rgt.name', 'ASC')
+        ->getQuery()
+        ->getResult()
+    ;
+    }
+
+    /**
+     * @return Reagent[] Returns an array of Reagent objects
+     */
     public function findByName($name)
     {
         // var_dump($name);

@@ -19,10 +19,19 @@ class ReagentController extends AbstractController
     /**
      * @Route("/", name="reagent_index", methods={"GET"})
      */
-    public function index(ReagentRepository $reagentRepository): Response
+    public function index(ReagentRepository $reagentRepository, Security $security): Response
     {
+        $rgts = $reagentRepository->findAll();
+        $currentUser = $security->getUser();
+        for ($i=0; $i < count($rgts); $i++) { 
+            if ($rgts[$i]->getPrivate() && $rgts[$i]->getOwner() != $currentUser) {
+                unset($rgts[$i]);
+            } else if ($rgts[$i]->getSecure() && !$currentUser->getAdmin()) {
+                unset($rgts[$i]);
+            }
+        }
         return $this->render('reagent/index.html.twig', [
-            'reagents' => $reagentRepository->findAll(),
+            'reagents' => $rgts,
         ]);
     }
 
@@ -32,10 +41,17 @@ class ReagentController extends AbstractController
     public function ajaxAction(Request $request, ReagentRepository $reagentRepository, Security $security) {
         if ($request->getMethod() == 'GET') {
             $name = $request->query->get('name');
-            self::logSearch($name, $security->getUser());
+            $currentUser = $security->getUser();
+            self::logSearch($name, $currentUser);
             $rgts = $reagentRepository->findByName($name);
             $jsonstring = '[';
             foreach ($rgts as $rgt) {
+                if ($rgt->getPrivate() && $rgt->getOwner() != $currentUser) {
+                    continue;
+                }
+                if ($rgt->getSecure() && !$currentUser->getAdmin()) {
+                    continue;
+                }
                 $jsonstring .= '{"id":"'. $rgt->getId() 
                     .'","name":"'. $rgt->getName() 
                     .'","formula":"'. $rgt->getFormula() 
