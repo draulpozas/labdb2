@@ -8,6 +8,7 @@ use App\Repository\ReagentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -31,6 +32,7 @@ class ReagentController extends AbstractController
             }
         }
         return $this->render('reagent/index.html.twig', [
+            'currentUser' => $currentUser->getUsername(),
             'reagents' => $rgts,
         ]);
     }
@@ -58,6 +60,7 @@ class ReagentController extends AbstractController
                     .'","cas":"'. $rgt->getCas() 
                     .'","private":"'. $rgt->getPrivate() 
                     .'","secure":"'. $rgt->getSecure() 
+                    .'","owner":"'. $rgt->getOwner()->getUsername() 
                     .'","notes":"'. $rgt->getNotes() .'"},';
             }
             $jsonstring .= ']';
@@ -110,8 +113,10 @@ class ReagentController extends AbstractController
     /**
      * @Route("/{id}/edit", name="reagent_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Reagent $reagent): Response
-    {
+    public function edit(Request $request, Reagent $reagent, Security $security): Response {
+        if ($security->getUser() != $reagent->getOwner()) {
+            return $this->render('reagent/not_editable.html.twig', ['cause' => 'You are not the owner of this reagent.']);
+        }
         $form = $this->createForm(ReagentType::class, $reagent);
         $form->handleRequest($request);
 

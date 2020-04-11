@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Reagent finder</h1>
+    <h1>👤 {{ currentUser }}</h1>
 
     <div id="finder">
         <input type="text" id="query" onkeyup="ifenter(event)">
@@ -24,6 +24,7 @@
                 <th>CAS</th>
                 {# <th>Private</th>
                 <th>Secure</th> #}
+                <th>Owner</th>
                 <th>Notes</th>
                 <th></th>
             </tr>
@@ -37,6 +38,7 @@
                 <td>{{ reagent.cas }}</td>
                 {# <td>{{ reagent.private ? 'Yes' : 'No' }}</td>
                 <td>{{ reagent.secure ? 'Yes' : 'No' }}</td> #}
+                <td>{{ reagent.owner.username }}</td>
                 <td>{{ reagent.notes }}</td>
                 <td>
                     <a class="action" href="{{ path('reagent_show', {'id': reagent.id}) }}">🗎</a> | <a class="action" href="{{ path('reagent_edit', {'id': reagent.id}) }}">🖉</a> | <a class="action" href="https://www.commonchemistry.org/ChemicalDetail.aspx?ref={{ reagent.cas }}" target="_blank">🌐</a>
