@@ -39,7 +39,7 @@ class ReagentRepository extends ServiceEntityRepository
     {
         // var_dump($name);
         return $this->createQueryBuilder('rgt')
-            ->andWhere('rgt.name LIKE :name OR rgt.formula LIKE :name')
+            ->andWhere('rgt.name LIKE :name OR rgt.formula LIKE :name OR rgt.cas LIKE :name')
             // ->andWhere('rgt.formula LIKE :name')
             ->setParameter('name', '%'. $name .'%')
             ->orderBy('rgt.name', 'ASC')
